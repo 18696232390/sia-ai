@@ -1,20 +1,20 @@
 <div align="center">
 
-<h1 align="center">🍭 GoAmzAI = GO Amazing AI</h1>
+<h1 align="center">🍭 SiaAI </h1>
 
-全新精美的个人+商业+企业私有化AIGC平台（[ChatGPT-Midjourney](https://github.com/Licoy/ChatGPT-Midjourney)的Pro版本）
+全新精美的个人+商业+企业私有化AIGC平台
 
 </div>
 
 ## 介绍
-🔥 产品说明、演示站、截图等相关内容请 [进入产品介绍](https://ipdj3sibjm.feishu.cn/docx/ARgjdOpTcohy2txfcPbclVbvnOf) 查看，本仓库下述介绍内容可能不是最新的，最新的请以此链接为准。
+🔥 产品说明、演示站、截图等相关内容请 [进入产品介绍](https://w0ngvkhm0p8.feishu.cn/wiki/ZjZkwK5lsigVmMkKWHicqUkynwb) 查看，本仓库下述介绍内容可能不是最新的，最新的请以此链接为准。
 
 ## 演示站点
-- [立即进入体验](https://demo6.goamzai.com)
+- [立即进入体验](https://sia.bailan.fun)
 
 ## 技术架构
-- 前端：Vue3 + NaiveUI
-- 后端：Golang + Gin
+- 前端：React + Antd
+- 后端：SpringBoot
 - 数据支持：MySQL5.7 + Redis
 
 ## 扫码获取
@@ -22,11 +22,6 @@
 > 备注：AIGC咨询
 
 <img src='./images/wechat.png' width='180' alt='微信二维码'/>
-
-### QQ扫码
-> 备注：AIGC咨询
-
-<img src='./images/qq.png' width='180' alt='QQ二维码'/>
 
 ## 你需要准备
 - 域名
@@ -45,15 +40,15 @@
 - [x] 🔥 **对话多会话隔离支持、参数独立配置云端存储、消息云端漫游**
 - [x] 🔥 **内容安全多层过滤：内置词库 -> 自定义词库 -> 第三方（百度内容审核）安全检测，可同时启用**
 - [x] 🔥 **开放式对话插件：已支持联网查询、IP信息、天气查询、快递查询等13+款插件，同时可结合开发文档扩展你自己的插件！支持ECMAScript5.1引擎、PHP、Python、NodeJS进行开发（插件持续增加中...）**
-- [x] 🔥 **AI绘画支持：文生图 / 放大 / 微调 / 垫图 / 混图 / 咒语解析 / 平移(Pan) / 扩图(Zoom) / 变幻(Vary) / 区域重绘**
+- [x] 🔥 **AI绘画支持：文生图 / 放大 / 微调 / 垫图 / 混图 / 咒语解析 / 平移(Pan) / 扩图(Zoom) / 变幻(Vary)**
 - [x] 🔥 **Midjourney绘画API、WSS、CDN反向代理支持**
 - [x] 🔥 **绘画账号池（无限量）：每个账号同时支持单独的并发线程设定，线程隔离。**
 - [x] ✨ **绘图服务在线启动、重启、关闭 + 队列数量实时查看**
 - [x] 绘画画廊：用户绘图公开展示（私有绘图不展示）
 - [x] 应用市场：可后台管理动态添加及其他管理
 - [x] **用户系统：邮箱 + 手机号码（登陆 / 注册 / 找回密码 / 修改密码 / 验证码登陆等等）**
-- [x] **支付系统：微信（支持扫码支付+JSAPI支持） / 支付宝 / 虎皮椒 / 自定义外链**
-- [x] **第三方登录：QQ / 微信扫码（个人订阅号、未认证公众号、已认证服务号均支持） / 微信网页授权 / Github / Gitee**
+- [x] **支付系统：微信 / 支付宝**
+- [x] **第三方登录：微信扫码（个人订阅号、未认证公众号、已认证服务号均支持）**
 - [x] 套餐系统：支持周期内每日重置 + 固定周期内总量多种方式
 - [x] 兑换码系统
 - [x] **站点在线DIY：例如主题色、LOGO、名称、SEO、区块圆角、自定义全局CSS、自定义全局流量统计等等均可在后台管理在线配置**
@@ -70,7 +65,7 @@
 - [x] 敏感词噪音去除开关和自定义正则支持
 
 ## 截图
-> 截图非实时更新，实际请以演示站或[产品介绍](https://ipdj3sibjm.feishu.cn/docx/ARgjdOpTcohy2txfcPbclVbvnOf)及最新版本的为准
+> 截图非实时更新，实际请以演示站或[产品介绍](https://w0ngvkhm0p8.feishu.cn/wiki/ZjZkwK5lsigVmMkKWHicqUkynwb)及最新版本的为准
 
 ### PC端
 #### 登陆授权
