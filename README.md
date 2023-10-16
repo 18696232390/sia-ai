@@ -70,7 +70,7 @@
 #### 登陆授权
 ![](./images/img.png)
 #### AI对话
-![](./images/img_1.png)
+![](./images/img_22.png)
 #### AI对话-修改(深色模式)
 ![](./images/img_2.png)
 #### AI绘画(深色模式)
