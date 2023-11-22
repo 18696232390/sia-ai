@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.OrderMapper">
+
+    <select id="searchList" resultType="org.sia.vo.response.AdminOrderSearchResVo">
+        SELECT
+            id,
+            user_id,
+            platform,
+            info,
+            pkg_id,
+            price,
+            state,
+            create_time,
+            update_time
+        FROM
+            t_order
+        <where>
+            <if test="condition!=null and condition.id!=null and condition.id!=''">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.userId!=null and condition.userId!=''">
+                AND user_id = #{condition.userId}
+            </if>
+            <if test="condition!=null and condition.platform!=null and condition.platform!=''">
+                AND platform = #{condition.platform}
+            </if>
+            <if test="condition!=null and condition.pkgId!=null and condition.pkgId!=''">
+                AND pkg_id = #{condition.pkgId}
+            </if>
+            <if test="condition!=null and condition.state!=null and condition.state!=''">
+                AND state = #{condition.state}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    <select id="searchInfo" resultType="org.sia.vo.response.AdminOrderSearchResVo">
+        SELECT
+            id,
+            user_id,
+            platform,
+            info,
+            pkg_id,
+            price,
+            state,
+            create_time,
+            update_time
+        FROM
+            t_order
+        WHERE id = #{id}
+    </select>
+</mapper>

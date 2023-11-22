@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.SensitiveWordMapper">
+
+    <select id="searchList" resultType="org.sia.vo.response.AdminSensitiveWordSearchResVo">
+        SELECT
+            id,
+            keyword,
+            update_time,
+            create_time
+        FROM
+           t_sensitive_word
+        <where>
+            <if test="condition!=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.keyword!=null and condition.keyword!=''">
+                AND keyword LIKE CONCAT( '%', #{condition.keyword}, '%' )
+            </if>
+            <if test="condition!=null and condition.createBeginTime!=null and condition.createBeginTime!=''">
+                AND create_time >= #{condition.createBeginTime}
+            </if>
+            <if test="condition!=null and condition.createEndTime!=null and condition.createEndTime!=''">
+                AND  #{condition.createEndTime} >= create_time
+            </if>
+            <if test="condition!=null and condition.updateBeginTime!=null and condition.updateBeginTime!=''">
+                AND update_time >= #{condition.updateBeginTime}
+            </if>
+            <if test="condition!=null and condition.updateEndTime!=null and condition.updateEndTime!=''">
+                AND  #{condition.updateEndTime} >= update_time
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+    <select id="info" resultType="org.sia.vo.response.AdminSensitiveWordSearchResVo">
+        SELECT
+            id,
+            keyword,
+            update_time,
+            create_time
+        FROM
+            t_sensitive_word
+        WHERE id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ChatAccountMapper">
+
+    <select id="searchList" resultType="org.sia.vo.response.AdminChatAccountResVo">
+        SELECT
+            id,
+            `name`,
+            `key`,
+            platform,
+            model,
+            is_valid,
+            check_time,
+            update_time,
+            create_time,
+            state,
+            total_token,
+            used_token
+        FROM
+           t_chat_account
+        <where>
+            <if test="condition!=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.name!=null and condition.name!=''">
+                AND `name` LIKE CONCAT( '%', #{condition.name}, '%' )
+            </if>
+            <if test="condition!=null and condition.key!=null and condition.key!=''">
+                AND `key` LIKE CONCAT( '%', #{condition.key}, '%' )
+            </if>
+            <if test="condition!=null and condition.isValid!=null">
+                AND is_valid = #{condition.isValid}
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+    <select id="info" resultType="org.sia.vo.response.AdminChatAccountResVo">
+        SELECT
+            id,
+            `name`,
+            `key`,
+            platform,
+            model,
+            is_valid,
+            check_time,
+            update_time,
+            create_time,
+            state,
+            total_token,
+            used_token
+        FROM
+            t_chat_account
+        WHERE id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ImageAccountMapper">
+
+    <select id="searchList" resultType="org.sia.vo.response.AdminImageAccountSearchResVo">
+        SELECT
+            id,
+            `name`,
+            platform,
+            config,
+            is_valid,
+            update_time,
+            create_time,
+            state
+        FROM
+            t_image_account
+        <where>
+            <if test="condition!=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.name!=null and condition.name!=''">
+                AND `name` LIKE CONCAT( '%', #{condition.name}, '%' )
+            </if>
+            <if test="condition!=null and condition.isValid!=null">
+                AND is_valid = #{condition.isValid}
+            </if>
+            <if test="condition!=null and condition.updateBeginTime!=null and condition.updateBeginTime!=''">
+                AND update_time >= #{condition.updateBeginTime}
+            </if>
+            <if test="condition!=null and condition.updateEndTime!=null and condition.updateEndTime!=''">
+                AND #{condition.updateEndTime} >= update_time
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+    <select id="info" resultType="org.sia.vo.response.AdminImageAccountSearchResVo">
+        SELECT
+            id,
+            `name`,
+            platform,
+            config,
+            is_valid,
+            update_time,
+            create_time,
+            state
+        FROM
+            t_image_account
+        WHERE id = #{id}
+    </select>
+</mapper>

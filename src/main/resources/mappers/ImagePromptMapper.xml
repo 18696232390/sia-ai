@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ImagePromptMapper">
+
+
+    <select id="searchList" resultType="cn.hutool.json.JSONObject">
+        SELECT
+            id,
+            draw_type,
+            scene_name,
+            scene_type,
+            url,
+            config
+        FROM t_image_prompt
+        WHERE user_id = #{condition.userId}
+        ORDER BY update_time DESC
+    </select>
+</mapper>

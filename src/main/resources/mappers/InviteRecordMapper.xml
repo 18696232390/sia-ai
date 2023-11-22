@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.InviteRecordMapper">
+
+
+    <select id="pageList" resultType="org.sia.vo.response.InviteRecordResVo">
+        SELECT
+            t2.user_id,
+            t2.avatar,
+            t2.email,
+            t2.nick_name,
+            t1.create_time
+        FROM t_invite_record t1
+        LEFT JOIN t_user t2 ON t1.`to` = t2.user_id
+        WHERE t1.`from` = #{userId}
+    </select>
+</mapper>

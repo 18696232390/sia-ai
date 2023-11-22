@@ -1,0 +1,90 @@
+server:
+  port: 10086
+  undertow:
+    accesslog:
+      enabled: true
+      pattern: '%{time,yyyy-MM-dd HH:mm:ss} %{i,X-forwarded-for} "%r" %s (%D ms)'
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  application:
+    name: sia-ai
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  resttemplate:
+    connectionRequestTimeout: 3000
+    connectTimeout: 3000
+    readTimeout: 60000
+    maxTotalConnect: 256
+    maxConnectPerRoute: 128
+    useHttpClientPool: true
+mybatis-plus:
+  type-aliases-package: org.sia.model
+  mapper-locations:
+    - classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+# OpenAI
+chatgpt:
+  domain: https://cfwus02.opapi.win/
+  timeout: 600
+  apiKeys:
+    - "sk-z5DWPS8O0D350xxxxxxx0ee4b47a31c"
+
+# 微信支付
+wxpay:
+  # 小程序 AppId
+  appId: wxf2exxxxxxx5860
+  # 商户号
+  mchId: 16xxxxx94
+  # 商户APIV3密钥
+  apiV3Key: 77a7c95b28cxxxxxxxxx08512c7c59
+  # 商户API私钥
+  privateKeyPath: ca/apiclient_key.pem
+  # 商户证书序列号
+  merchantSerialNumber: 71CCC008DDxxxxxxxxx7ADAC631B88CA63
+  # 支付描述
+  description: AI文案魔笔会员
+  # 支付回调接口
+  notifyUrl: https://xxx.xxxxx.xxxx/
+
+# 支付宝
+alipay:
+  protocol: https
+  gatewayHost: openapi.alipay.com
+  signType: RSA2
+  appId: 20210xxxxx221
+  merchantPrivateKey: MIIEvQIBADANBgkqhkiG9wxxxxxxxxQCDcoIgtBlqTK0iAKLtp5vDkN6fbtu0D5hjhj43xawgXOv8Lwm/brSa467ppf6Tw2yXhmzGOGavoamyz8/Hec4WsEVT4l144sI8D/5AvFD21kUpg4kAgDrr7bMHBtPMuU95DaADnG10M2egTD2cwv1LJXz91EPziypcwUT+YqMEmJHn6KFpTEXPQuaIsnWUMOP4FB+GjP9bn4m0c77CCJ465DfCNyA4gUdXN+i7cgw81IGdyDexGHaj4jmRXux1+CSfP11Z6887Yoai2HGX0q1Q5ZWGWgNN8KqQ5xPMqTTCVxnILVlKxPJ/0BpqzM9NLAXQJHXzGn+4gBa2bGgk9B4FAgMBAAECggEAT66qk4iZn4a7rVEVc1uXYQYA7kUViiGqDyrhrI13umaZ51XcYt+JPBupfJnTqV9eBLzIU6D9HpqxdGPlYNbFx5sza5Zdc1qCxEYtqrB9pCRf6LqD4nnZPgvp6uiInCH5uzg3N/kroLVIrDOLZewN/+/JxVVXm9tQ4smGOW8xwyaZ3YzJVkPRnh8KtVnTlNKJTjZYvYMKTAAKUiI7Kfys5rgqQrZ4uj5EGZQIYZ88VerbUB9O0dGt0mp9TB3Zm7xP0FoK6pWbnPEcnvgKWBR2+bmFHOjt/ZurlNmIMkf2q0Fr/hhRuGYkxRgo+sqzmRik7dpB3AYI/fSiCIbeod/iQQKBgQDOPfHxX0OI7glfhR8yrUktnJ2FWvZ9Nd4umof5DeEzJEzWAs9WfL/FAuN9nIHnR9WuWYQdK11K8vD9Yw7GIee51JmVIUcB/uG5HDQVC7pT7cpk5gqsd3hiMDqeiQ+vssnP+j9S0xynXKT/ePvEaKB6rqLNmvU39hNl1ODiTfZvjwKBgQCjKQtd2RRWYoJc66BmlWp04h2UyL29VWyrTMWkbSt/evqpb5m35G+N7eXhppHsUkFrrrN1qA+CedUxhNieYR6sfQ1TeyP9Dw6BVW7KwvPbgyreacg04Ble2a5vntfWl8ymFT95753LocvaLZdrXvNGoUED24xzwgcIiQbjgJoPKwKBgQCHE6UhbD5EMXrsF7kuLLZP7FJy4/eqXByPs2A46zFCmJTGWgLH516GPvUV8OpXuwGldjWEEUHB88mIe1dSxyQI3shUFv51vSTDY0htPEgl7gjv+oalHH44+NN7v9MJRPTOhVzx9xi+OHxMYkWrBseMclJojQPsSfu8Zyd+sIcl2wKBgA+PWIAotaHPXzNRXUirMy3Wao/H3SBzRxvHBIo7xwwvRDxoYjaBWIomh+fPJNduuMJ2NLMhxejhiY1hZ+8iv/QfMOgnNDVr/CwlY51+nhbvGWWAnRE91e2PwOzwLxFOBLxKBnWwflHvKiuycWBR+81ej364r1pSxKzxtHB50TdlAoGACmZ43T1nwekAyDMd3twkad4agwWYEaP182VC3A55OJHgmHCfhrtCiqN/4gbQMgo7WvtKSiejRqhuS8DMZjoVtU2DLBFck7xUsms5HzmmK75NzIuE2epPPUTFPNJVOhBqkp1fY2WkNkgGymTg6Cba+nm6/3q2DOadolNqM4Q25+4=
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCxxxxxxxxxxxjGdOjHMLLRTe1LTi6V+oGwEWDx1llsktPumBBviD4uX0NzU0oLtX0g+Ml4GgISI1/HpvDmF3ifIOJnp7C50MFxxYoMrRYwoIqoxx7mg+5yB+i8gm+dJvdxuV/AfeywyshX3JKzy1OjSpe5w9hiFgy3Tpw9FhRO+8bCGy6UOP986fTL17k9DyC5PzjaxCd3EwuCHpktHKTh0dqLeyqTr1Ga3VzZldaW7QCKWpXP0DQo8Oc9x+g9gtlVBEROx5tdQOEme5AO2Z3YmEncdl4KGlCcX0Y1RPuRhr1rf7K0Y5UVnzeUyPOY1Tf3ponGzL68KxCFU+V2BTdsuskwIDAQAB
+  # 可设置异步通知接收服务地址（可选）
+  notifyUrl: https://xxxxxxxx
+  # 可设置AES密钥，调用AES加解密相关接口时需要（可选）
+  encryptKey:
+
+# 阿里云OSS
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAIxxxxxxeDgpsgD
+  accessKeySecret: bvePDUP7804xxxxxxxs4pXSeiQ4
+  bucket: sia-ai
+
+# AiProxy
+aiproxy:
+  apiKey: sk-AQMjiVvI3mhQvxxxxxxxxxxlHpht2dFpk
+
+# 百度图像增强
+baidu:
+  apiKey: sZIXqMixCiVxxxxxx2AX6yPh
+  secretKey: SK275uNjO5xxxxxxxxxxcAENfYO
+
+
+
+
+
+
+

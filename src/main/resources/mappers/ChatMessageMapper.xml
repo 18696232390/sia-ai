@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ChatMessageMapper">
+
+    <select id="pageList" resultType="org.sia.vo.response.ChatMessageResVo">
+        SELECT * FROM t_chat_message
+        WHERE session_id = #{condition.sessionId}
+        AND user_id = #{condition.userId}
+        ORDER BY create_time
+    </select>
+    <select id="getContextList" resultType="org.sia.model.ChatMessage">
+        SELECT
+            user_text,
+            ai_text,
+            model
+        FROM t_chat_message
+        WHERE session_id = #{id}
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+    <select id="searchList" resultType="org.sia.vo.response.AdminSessionMessageResVo">
+        SELECT
+            id,
+            session_id,
+            user_id,
+            model,
+            user_text AS question,
+            ai_text AS answer,
+            cost,
+            back,
+            create_time,
+            update_time
+        FROM
+            t_chat_message
+        <where>
+            <if test="condition !=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition !=null and condition.userId!=null and condition.userId!=''">
+                AND user_id = #{condition.userId}
+            </if>
+            <if test="condition !=null and condition.question!=null and condition.question!=''">
+                AND user_text LIKE CONCAT('%',#{condition.question}, '%')
+            </if>
+            <if test="condition !=null and condition.answer!=null and condition.answer!=''">
+                AND ai_text LIKE CONCAT('%',#{condition.answer}, '%')
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    <select id="load" resultType="org.sia.vo.response.ChatMessageResVo">
+        SELECT
+        id,
+        session_id,
+        model,
+        user_text,
+        ai_text,
+        create_time
+        FROM
+        t_chat_message
+        WHERE user_id = #{condition.userId}
+        AND session_id = #{condition.sessionId}
+        <if test="condition.action == 'UP' and condition.offsetId!=null">
+            AND id > #{condition.offsetId}
+            ORDER BY create_time
+        </if>
+        <if test="condition.action == 'UP' and condition.offsetId==null">
+            ORDER BY create_time DESC
+        </if>
+        <if test="condition.action == 'DOWN' and condition.offsetId!=null">
+            AND #{condition.offsetId} > id
+            ORDER BY create_time DESC
+        </if>
+        <if test="condition.action == 'DOWN' and condition.offsetId==null">
+            ORDER BY create_time
+        </if>
+        LIMIT #{condition.limit}
+    </select>
+    <select id="topList" resultType="org.sia.vo.response.ChatMessageResVo">
+        SELECT
+            id,
+            session_id,
+            model,
+            user_text,
+            ai_text,
+            create_time
+        FROM
+            t_chat_message
+        WHERE user_id = #{userId}
+        AND session_id = #{sessionId}
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

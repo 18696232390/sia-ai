@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ChatSessionMapper">
+
+
+    <select id="getSessionList" resultType="org.sia.vo.response.ChatSessionListResVo">
+        SELECT * FROM t_chat_session
+        WHERE user_id = #{userId}
+        <if test="keyword!=null and keyword!=''">
+            AND title LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        ORDER BY is_pinned DESC,create_time DESC
+    </select>
+    <select id="searchList" resultType="org.sia.vo.response.AdminSessionResVo">
+        SELECT
+            id,
+            title,
+            user_id,
+            model,
+            random,
+            max_token,
+            fresh,
+            `repeat`,
+            context,
+            create_time,
+            update_time
+        FROM
+            t_chat_session
+        <where>
+            <if test="condition!=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.title!=null and condition.title!=''">
+                AND title LIKE CONCAT('%',#{condition.title},'%')
+            </if>
+            <if test="condition!=null and condition.userId!=null and condition.userId!=''">
+                AND user_id = #{condition.userId}
+            </if>
+            <if test="condition!=null and condition.model!=null and condition.model!=''">
+                AND model = #{condition.model}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ToolMapper">
+    <insert id="addUser">
+        INSERT INTO t_user_tool(`user_id`, `tool_id`, `update_time`)
+        VALUES ( #{userId}, #{toolId}, NOW());
+    </insert>
+
+    <delete id="deleteUser">
+        DELETE FROM t_user_tool where user_id = #{userId} AND tool_id = #{toolId}
+    </delete>
+
+    <select id="appList" resultType="org.sia.model.AiTool">
+        SELECT t2.*
+        FROM t_user_tool t1
+                 LEFT JOIN t_tool t2 ON t2.id = t1.tool_id
+        WHERE t1.user_id = #{userId}
+        ORDER BY sort
+    </select>
+    <select id="hasTool" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM t_user_tool where user_id = #{userId} AND tool_id = #{toolId}
+    </select>
+</mapper>

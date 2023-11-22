@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ChatModelMapper">
+
+    <select id="infoList" resultType="org.sia.vo.response.AdminChatModelInfoResVO">
+        SELECT
+            id,
+            `key`,
+            `name`,
+            alias,
+            token,
+            `open`,
+            sort,
+            integral,
+            custom
+        FROM
+            t_chat_model
+        <where>
+            <if test="custom!=null">
+                AND custom = #{custom}
+            </if>
+            <if test="open!=null">
+                AND `open` = #{open}
+            </if>
+        </where>
+        ORDER BY sort
+    </select>
+    <select id="showList" resultType="org.sia.vo.response.ChatModelShowResVo">
+        SELECT
+            `name` as value,
+            alias as `key`,
+            integral as cost
+        FROM
+            t_chat_model
+        where open = 1
+        ORDER BY custom, sort
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ExchangeCodeMapper">
+
+  <select id="searchList" resultType="org.sia.vo.response.ExchangeResVo">
+    SELECT
+      t1.id,
+      t2.`name`,
+      t2.category,
+      t1.`code`,
+      t2.expire_day,
+      t1.user_id,
+      t2.integral,
+      t1.create_time,
+      t1.exchange_time
+    FROM
+    t_exchange_code t1
+    LEFT JOIN t_package t2 ON t2.id = t1.pkg_id
+    <where>
+      <if test="condition!=null and condition.code!=null and condition.code!=''">
+        AND t1.`code` = #{condition.code}
+      </if>
+      <if test="condition!=null and condition.userId!=null and condition.userId!=''">
+        AND t1.user_id = #{condition.userId}
+      </if>
+      <if test="condition!=null and condition.id!=null">
+        AND t1.id = #{condition.id}
+      </if>
+    </where>
+    ORDER BY create_time DESC
+  </select>
+</mapper>

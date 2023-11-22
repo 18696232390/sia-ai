@@ -1,0 +1,9 @@
+# 邮件服务器的SMTP地址，可选，默认为smtp.<发件人邮箱后缀>
+host = smtp.163.com
+# 邮件服务器的SMTP端口，可选，默认25
+port = 25
+# 发件人（必须正确，否则发送失败）
+from = xx科技<xxxxxxxxx@163.com>
+# 密码（注意，某些邮箱需要为SMTP服务单独设置密码，详情查看相关帮助）
+pass = xxxxxxxx
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.ImageMapper">
+
+  <select id="searchList" resultType="org.sia.vo.response.ImageTaskSearchResVo">
+    SELECT * FROM t_image_task
+    <where>
+      <if test="condition.userId != null and condition.userId != ''">
+        AND user_id = #{condition.userId}
+      </if>
+      <if test="condition.keyword != null and condition.keyword != ''">
+        AND description LIKE CONCAT('%',#{condition.keyword},'%')
+      </if>
+      <if test="condition.taskId != null">
+        AND id = #{condition.taskId}
+      </if>
+    </where>
+    ORDER BY submit_time desc
+  </select>
+    <select id="searchGalleryList" resultType="org.sia.vo.response.ImageGallerySearchResVo">
+      SELECT
+        t1.id,
+        t2.avatar,
+        t2.nick_name,
+        t1.prompt,
+        t1.prompt_en,
+        t1.image_url,
+        t1.mini_url,
+        t1.submit_time AS create_time
+      FROM
+        t_image_task t1
+        LEFT JOIN t_user t2 on t2.user_id = t1.user_id
+      WHERE
+        t1.is_public = 1
+        AND t1.`status` = 'SUCCESS'
+      ORDER BY
+        t1.submit_time DESC
+    </select>
+</mapper>

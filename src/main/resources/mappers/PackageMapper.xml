@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sia.mapper.PackageMapper">
+
+    <select id="getList" resultType="org.sia.vo.response.PackageListResVo">
+        SELECT
+            id,
+            `name`,
+            ROUND(price/100,2) as price,
+            discount,
+            description,
+            expire_day,
+            integral,
+            each_day
+        FROM t_package
+        WHERE is_public = 1
+        ORDER BY sort
+    </select>
+    <select id="getMyList" resultType="org.sia.vo.response.PackageUserResVo">
+        SELECT
+            id,
+            `name`,
+            category,
+            integral,
+            each_day,
+            remain,
+            integral - remain AS used,
+            reset_time,
+            start_time,
+            end_time,
+            IF(end_time>NOW(),0,1) AS is_expire
+        FROM t_user_package
+        WHERE user_id = #{userId}
+        ORDER BY start_time ASC
+    </select>
+    <select id="searchList" resultType="org.sia.vo.response.AdminPkgSearchResVo">
+        SELECT
+            id,
+            category,
+            `name`,
+            price,
+            discount,
+            description,
+            expire_day,
+            integral,
+            is_public,
+            create_time,
+            update_time,
+            sort,
+            each_day
+        FROM
+            t_package
+        <where>
+            <if test="condition!=null and condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition!=null and condition.category!=null and condition.category!=''">
+                AND category = #{condition.category}
+            </if>
+            <if test="condition!=null and condition.name!=null and condition.name!=''">
+                AND `name` LIKE CONCAT( '%', #{condition.name}, '%' )
+            </if>
+            <if test="condition!=null and condition.description!=null and condition.description!=''">
+                AND `description` LIKE CONCAT('%', #{condition.description},'%')
+            </if>
+        </where>
+        ORDER BY sort
+    </select>
+    <select id="searchInfo" resultType="org.sia.vo.response.AdminPkgSearchResVo">
+        SELECT
+            id,
+            category,
+            `name`,
+            price,
+            discount,
+            description,
+            expire_day,
+            integral,
+            is_public,
+            create_time,
+            update_time,
+            sort,
+            each_day
+        FROM
+            t_package
+        WHERE id = #{id}
+    </select>
+    <select id="simpleList" resultType="org.sia.vo.response.AdminPkgSearchResVo">
+        SELECT
+            id,
+            `name`
+        FROM
+            t_package
+        ORDER BY sort
+    </select>
+</mapper>
