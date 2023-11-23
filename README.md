@@ -10,7 +10,7 @@
 🔥 产品说明、演示站、截图等相关内容请 [进入产品介绍](https://w0ngvkhm0p8.feishu.cn/wiki/ZjZkwK5lsigVmMkKWHicqUkynwb) 查看，本仓库下述介绍内容可能不是最新的，最新的请以此链接为准。
 
 ## 演示站点
-- [立即进入体验](https://sia.bailan.fun)
+- [立即进入体验](http://124.71.61.5)
 
 ## 技术架构
 - 前端：React + Antd
